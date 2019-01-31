@@ -1,0 +1,12 @@
+Django==1.11.6
+gunicorn==19.6.0
+psycopg2==2.6.2
+django-ckeditor
+django-ajax-selects
+django-jet
+django-imagekit==4.0.2
+Pillow==5.1.0
+djangorestframework
+pytz
+Pyrebase
+facebook-sdk
