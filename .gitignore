@@ -1,0 +1,9 @@
+src/cambas/__pycache__
+media/
+static/admin/
+static/jet
+static/jet.dashboard
+src/api
+static/ajax_select
+src/users/__pycache__
+src/users/migrations
