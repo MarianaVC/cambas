@@ -242,7 +242,7 @@ def login_web(request):
 			token = Token.objects.get(user=user).key
 			login(request,user)
 			if token:
-				return redirect('users/profile')
+				return redirect('/users/profile')
 			else:
 				return JsonResponse({'error': 'Invalid data'}, safe=False, status=400)
 				
@@ -251,7 +251,6 @@ def login_web(request):
 
 		except Token.DoesNotExist:
 		 	return render(request,'index.html',{'valid':False})
-
 
 	else:
 		return HttpResponseNotFound("Content not found")  
