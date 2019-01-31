@@ -305,13 +305,12 @@ def sing_up_web(request):
 def fanpage(request):
 	import requests
 
-	payload = {'access_token': 'EAAPyrJ5jHwQBAEV3H1vDLTZCeICNJFBmonlNiTC190DMBFcEW1C7Ylm28t6Y0Ez7Lwu9jDSVczlDq7QqkoEpzTr7B1x24l3cLeavX5yVH0Udkvf3SXPqIKTrPZA0ZBw4FwWTFWasI2rU0mgdf0FJtWxbxuH33PX4IZC9kGSMOXCPOYy6UprddcKMOk1rFvsZD'}
-
-	url = 'https://graph.facebook.com/v3.2/inputmexico'
-	resp = requests.get(url, params = payload)
-	print(resp.__dict__)
-	return render(request,'users/fanpage.html')
-
+	url = "https://graph.facebook.com/oauth/access_token?client_id=1111248135724804&client_secret=ad76d19ea6fc74a25a7183283170a2af&grant_type=client_credentials"
+	resp = requests.get(url, params = []).json()
+	access_token = (resp['access_token'])
+	posts = "https://graph.facebook.com/v2.9/LADbible/posts?access_token="+access_token
+	data = requests.get(posts, params = []).json
+	return render(request,'users/fanpage.html',{'data':data})
 
 def logout_user(request):
 	from django.contrib.auth import logout
