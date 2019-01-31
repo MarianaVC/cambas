@@ -1,0 +1,31 @@
+version: '2'  
+services:  
+  nginx:
+    image: nginx:latest
+    container_name: NGINXDOCKERCAMBAS
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/src
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./src/static:/static             
+    depends_on:
+      - web
+  db:
+    image: postgres:latest
+    container_name: PSQLDOCKERCAMBAS
+    ports:
+     - "5434:5432"    
+  web:
+    build: .
+    container_name: DJANGOXDOCKERCAMBAS
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn --timeout 120 cambas.wsgi -b 0.0.0.0:8000 "
+    depends_on:
+      - db
+    volumes:
+      - ./src:/src
+      - ./src/static:/static       
+    expose:
+      - "8000"
+    links:
+      - db
